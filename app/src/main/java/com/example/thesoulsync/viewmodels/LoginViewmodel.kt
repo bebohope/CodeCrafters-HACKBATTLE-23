@@ -24,34 +24,53 @@ class LoginViewmodel(private val auth: FirebaseAuth) : ViewModel() {
 
     fun onEvent(event : LoginEvent){
         when(event){
-            is LoginEvent.Login -> {
-                auth.signInWithEmailAndPassword(event.email, event.password)
-                    .addOnCompleteListener() { task ->
-                        if (task.isSuccessful) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d(TAG, "signInWithEmail:success")
-                            viewModelScope.launch {
-                                _states.emit(
-                                    _states.value.copy(
-                                        user = User(auth.currentUser?.uid , ""),
-                                        logged = true
-                                    )
-                                )
-                                Log.d(TAG, "signInWithEmail:success" + "${_states.value.user?.uuid}")
+            LoginEvent.Login -> {
+                _states.value.email?.let {
+                    _states.value.password?.let { it1 ->
+                        auth.signInWithEmailAndPassword(it, it1)
+                            .addOnCompleteListener() { task ->
+                                if (task.isSuccessful) {
+
+                                    Log.d(TAG, "signInWithEmail:success")
+                                    viewModelScope.launch {
+                                        _states.emit(
+                                            _states.value.copy(
+                                                user = User(auth.currentUser?.uid , ""),
+                                                logged = true
+                                            )
+                                        )
+                                        Log.d(TAG, "signInWithEmail:success" + "${_states.value.user?.uuid}")
+                                    }
+
+
+                                } else {
+                                    Log.w(TAG, "signInWithEmail:failure", task.exception)
+                                    onEvent(LoginEvent.LoginFailed)
+
+                                }
                             }
-
-
-
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Log.w(TAG, "signInWithEmail:failure", task.exception)
-                            onEvent(LoginEvent.LoginFailed)
-
-                        }
                     }
+                }
             }
             LoginEvent.LoginFailed -> {
                 throw LoginFailedException("")
+            }
+
+            is LoginEvent.setEmail -> {
+                viewModelScope.launch {
+                    _states.emit(
+                        _states.value.copy(
+                            email = event.email
+                        )
+                    )
+                }
+            }
+            is LoginEvent.setPassword -> viewModelScope.launch {
+                _states.emit(
+                    _states.value.copy(
+                        password = event.password
+                    )
+                )
             }
         }
     }

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "934592162821",
+    "project_id": "thesoulsync-39d5f",
+    "storage_bucket": "thesoulsync-39d5f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:934592162821:android:6c0c61cf65bf26cd90c06c",
+        "android_client_info": {
+          "package_name": "com.example.thesoulsync"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBbKMzYPOFG7M6I5qBdKj57p__NBZI8HkY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,4 +1,4 @@
-package com.example.thesoulsync.viewmodels
+package com.example.thesoulsync
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

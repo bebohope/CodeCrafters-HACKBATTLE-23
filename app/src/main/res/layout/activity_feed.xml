@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#D2baa8"
+    android:background="#000000"
     tools:context=".viewmodels.FeedActivity">
 
     <androidx.appcompat.widget.Toolbar

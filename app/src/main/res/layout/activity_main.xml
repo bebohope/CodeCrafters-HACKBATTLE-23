@@ -42,7 +42,7 @@
                 android:id="@+id/Login"
                 android:layout_width="235dp"
                 android:layout_height="41dp"
-                android:background="@drawable/blueButton"
+                android:background="@drawable/bluebutton"
                 android:backgroundTint="#455154"
                 android:text="LOGIN"
                 android:textAppearance="@null"

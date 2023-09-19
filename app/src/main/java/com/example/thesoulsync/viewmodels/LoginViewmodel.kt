@@ -53,6 +53,15 @@ class LoginViewmodel(private val auth: FirebaseAuth) : ViewModel() {
                 }
             }
             LoginEvent.LoginFailed -> {
+                viewModelScope.launch {
+                    _states.emit(
+                        _states.value.copy(
+                            email = "",
+                            password = ""
+                        )
+                    )
+                }
+
                 throw LoginFailedException("")
             }
 

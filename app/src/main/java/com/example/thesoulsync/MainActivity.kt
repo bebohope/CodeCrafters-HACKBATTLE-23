@@ -4,10 +4,12 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.lifecycleScope
 import com.example.thesoulsync.databinding.ActivityMainBinding
 import com.example.thesoulsync.events.LoginEvent
+import com.example.thesoulsync.viewmodels.LoginFailedException
 import com.example.thesoulsync.viewmodels.LoginViewmodel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -50,6 +52,15 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         )
+
+        binding.Login.setOnClickListener {
+            try {
+                loginViewmodel.onEvent(LoginEvent.Login)
+            }catch (e : LoginFailedException){
+                Toast.makeText(applicationContext, "Login Unsuccessful", Toast.LENGTH_SHORT).show()
+            }
+
+        }
 
 
     }
